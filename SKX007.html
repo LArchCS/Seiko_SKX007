@@ -13,33 +13,27 @@
 <body>
   <canvas id="canvas" width="450" height="450"></canvas>
   <script>
-    var now = new Date();
-    var hour = now.getHours();
-    var r = 255 - Math.abs(hour - 12) * 5;
-    var g = 255;
-    var b = 255 - Math.abs(hour - 12) * 5;
-    console.log(r + " " + g + " " + b)
-    var lume = "rgb" + "(" + r + "," + g + "," + b + ")";
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
-    ctx.beginPath();
-    ctx.strokeStyle="black";
-
     ctx.translate(canvas.height / 2, canvas.height / 2);  // re-set 0, 0
     var radius = canvas.height / 2 * 0.80;
     drawClock();
     setInterval(drawClock, 1000 / 6.0);
 
     function drawClock() {
-      drawFace(ctx, radius);
-      drawNumbers(ctx, radius);
-      drawBrazel(ctx, radius);
-      drawFrame(ctx, radius);
-      drawTime(ctx, radius);
-      drawLines(ctx, radius);
+      var now = new Date();
+      var hour = now.getHours();
+      var rb = 255 - Math.abs(hour - 12) * 5;
+      var lume = "rgb" + "(" + rb + ", 255," + rb + ")";
+      drawFace(ctx, radius, lume);
+      drawNumbers(ctx, radius, lume);
+      drawBrazel(ctx, radius, lume);
+      drawFrame(ctx, radius, lume);
+      drawTime(ctx, radius, lume);
+      drawLines(ctx, radius, lume);
     }
 
-    function drawFrame(ctx, radius) {
+    function drawFrame(ctx, radius, lume) {
       var grad;
       // draw dial
       ctx.beginPath();  // 这个 path 就是 arc，同时管 fill 和 stroke
@@ -80,7 +74,7 @@
       }
     }
 
-    function drawFace(ctx, radius) {
+    function drawFace(ctx, radius, lume) {
       // draw dial
       ctx.beginPath();
       ctx.arc(0, 0, radius * 0.9, 0, 2*Math.PI);  // x, y, radius, startAngle, endAngle, anticlockwise
@@ -119,7 +113,7 @@
 
     }
 
-    function drawBrazel(ctx, radius) {
+    function drawBrazel(ctx, radius, lume) {
       // draw brazel
       ctx.beginPath();
       ctx.arc(0, 0, radius*1.02, 0, 2*Math.PI);
@@ -130,7 +124,7 @@
       drawLines(ctx, radius);
     }
 
-    function drawLines(ctx, radius) {
+    function drawLines(ctx, radius, lume) {
       ctx.strokeStyle="white";
       ctx.fillStyle = "white";
       ctx.beginPath();
@@ -193,7 +187,7 @@
       }
     }
 
-    function drawNumbers(ctx, radius) {
+    function drawNumbers(ctx, radius, lume) {
       radius = radius * 0.95;
       var ang;
       var num;
@@ -294,7 +288,7 @@
       }
     }
 
-    function drawTime(ctx, radius) {
+    function drawTime(ctx, radius, lume) {
       var now = new Date();
       var hour = now.getHours();
       var minute = now.getMinutes();
@@ -305,13 +299,13 @@
       hour=(hour*Math.PI/6)+
       (minute*Math.PI/(6*60))+
       (second*Math.PI/(360*60));
-      drawHourHand(ctx, hour - Math.PI);
+      drawHourHand(ctx, hour - Math.PI, lume);
       // minute
       minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
-      drawMinuteHand(ctx, minute - Math.PI);
+      drawMinuteHand(ctx, minute - Math.PI, lume);
       // second
       second=(second*Math.PI/30);
-      drawSecondHand(ctx, (second + milliSecond) - Math.PI);
+      drawSecondHand(ctx, (second + milliSecond) - Math.PI, lume);
       //drawHand(ctx, second, radius*0.9, radius*0.02);
     }
 
@@ -328,7 +322,7 @@
       ctx.rotate(-pos);
     }
 
-    function drawHourHand(ctx, pos) {
+    function drawHourHand(ctx, pos, lume) {
       var length = 20;
       var width = 10;
       ctx.fillStyle = lume;
@@ -355,7 +349,7 @@
       ctx.closePath();
     }
 
-    function drawMinuteHand(ctx, pos) {
+    function drawMinuteHand(ctx, pos, lume) {
       var length = 20;
       var width = 10;
       ctx.fillStyle = lume;
@@ -403,7 +397,7 @@
       ctx.closePath();
     }
 
-    function drawSecondHand(ctx, pos) {
+    function drawSecondHand(ctx, pos, lume) {
       var length = 20;
       var width = 10;
       ctx.lineWidth = 3;
