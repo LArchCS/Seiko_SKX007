@@ -15,9 +15,9 @@
   <script>
     var now = new Date();
     var hour = now.getHours();
-    var r = 255 - Math.abs(hour - 12) * 2;
+    var r = 255 - Math.abs(hour - 12) * 4;
     var g = 255;
-    var b = 255 - Math.abs(hour - 12) * 2 ;
+    var b = 255 - Math.abs(hour - 12) * 4;
     console.log(r + " " + g + " " + b)
     var lume = "rgb" + "(" + r + "," + g + "," + b + ")";
     var canvas = document.getElementById("canvas");
