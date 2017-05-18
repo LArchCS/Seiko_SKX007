@@ -36,7 +36,7 @@
     function drawFrame(ctx, radius, lume) {
       var grad;
       // draw dial
-      ctx.beginPath();  // 这个 path 就是 arc，同时管 fill 和 stroke
+      ctx.beginPath();
       ctx.arc(0, 0, radius*0.9, 0, 2*Math.PI);  // x, y, radius, startAngle, endAngle, anticlockwise
       // draw frame
       grad = ctx.createRadialGradient(0, 0, radius*0.8, 0, 0, radius*1.05);  // cx, cy, r, fx, fy, fr
