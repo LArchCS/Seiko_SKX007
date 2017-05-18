@@ -4,7 +4,13 @@
   <body style="text-align: center">
     <canvas id="canvas" width="450" height="450"></canvas>
     <script>
-      var lume = "#f5fff5";
+      var now = new Date();
+      var hour = now.getHours();
+      var r = 255 - Math.abs(hour - 12) * 2;
+      var g = 255;
+      var b = 255 - Math.abs(hour - 12) * 2 ;
+      console.log(r + " " + g + " " + b)
+      var lume = "rgb" + "(" + r + "," + g + "," + b + ")";
       var canvas = document.getElementById("canvas");
       var ctx = canvas.getContext("2d");
       ctx.beginPath();
@@ -433,6 +439,8 @@
         ctx.closePath();
       }
     </script>
-    <p> My Seiko SKX 007 </p>
+    <h3>My Seiko SKX 007</h3>
+    <p>The lume changes color over time</p>
+    <p>The bazel is rotatable</p>
   </body>
 </html>
