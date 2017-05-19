@@ -241,19 +241,19 @@
           ctx.rect(-1.57*r, -r, 2.57*r, 2*r);
           ctx.fill();
           ctx.stroke();
-
           ctx.closePath();
           var date = new Date().getDate();
           var day = new Date().getDay();
-          ctx.font = radius*0.15 + "px arial";
+          var font = "Inconsolata"
+          ctx.font = radius*0.15 + "px " + font;
           ctx.textBaseline="middle";
-          ctx.textAlign="left";
-          ctx.fillStyle = "#222";
-          ctx.fillText(date.toString(), -1.5*r, 0);
-          ctx.font = radius*0.1 + "px arial";
-          ctx.fillText(days[day], -4.9*r, 0.1*r);
+          ctx.textAlign="middle";
+          ctx.fillStyle = "black";
+          if (day == 6) {ctx.fillStyle = "blue";}
+          else if (day == 7) {ctx.fillStyle = "red";}
+          ctx.fillText(date.toString(), -0.3*r, 0);
+          ctx.fillText(days[day], -3.3*r, 0);
         } else if (num == 12) {
-
           ctx.moveTo(0, 2*r);
           ctx.lineTo(-1.8*r, -1*r);
           ctx.lineTo(-1.6*r, -1.5*r);
