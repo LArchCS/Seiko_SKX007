@@ -196,7 +196,7 @@
         ctx.rotate(-ang);
         ctx.beginPath();
         var r = radius * 0.075;
-        var days = {1:"MON", 2:"TUE", 3:"WED", 4:"THU", 5:"FRI", 6:"SAT", 7:"SUN"};
+        var days = {1:"MON", 2:"TUE", 3:"WED", 4:"THU", 5:"FRI", 6:"SAT", 0:"SUN"};
         if (num == 6) {
           ctx.rect(-r, -r, 2*r, 2*r);
           ctx.fill();
@@ -249,9 +249,9 @@
           ctx.textBaseline="middle";
           ctx.textAlign="middle";
           ctx.fillStyle = "black";
-          if (day == 6) {ctx.fillStyle = "blue";}
-          else if (day == 7) {ctx.fillStyle = "red";}
           ctx.fillText(date.toString(), -0.3*r, 0);
+          if (day == 6) {ctx.fillStyle = "blue";}
+          else if (day == 0) {ctx.fillStyle = "red";}
           ctx.fillText(days[day], -3.3*r, 0);
         } else if (num == 12) {
           ctx.moveTo(0, 2*r);
